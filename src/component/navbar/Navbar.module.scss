@@ -1,0 +1,13 @@
+@import '../../index.scss';
+.bgNavbar{
+    background-color: $bgColor;
+}
+
+.m_menu{
+    .link{
+        &:hover{
+            background-color: $bgTransparent !important;
+        }
+        
+    }
+}
