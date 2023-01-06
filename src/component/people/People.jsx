@@ -3,19 +3,23 @@ import { useEffect } from 'react';
 import { getTrending } from './../api/api';
 import style from '../Upcoming/upcoming.module.scss';
 import { Link } from 'react-router-dom';
+import Loading from './../../ui/loading/Loading';
 
 export default function People() {
+  const [loading, setloading] = useState(false)
   const [people, setpeople] = useState([]);
   let getData = async ()=>{
+    setloading(true)
     let data = await getTrending('person');
     setpeople(data);
+    setloading(false)
   }
   useEffect(() => {
     getData()
   }, [])
   return (
     <>
-    <div className="container">
+    {loading?<Loading loading={loading}/>:<div className="container">
     <div className="row mt-5 gx-4 gy-4">
       <div className="col-md-4">
         <div className={`w-25 mb-3 ${style.brder}`}>
@@ -34,7 +38,7 @@ export default function People() {
       </div>
       )}
     </div>
-    </div>
+    </div>}
     </>
   )
 }

@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export default function Login({SaveUserData}) {
+  const [loading, setloading] = useState(false)
   let navigat = useNavigate()
   const [error, seterror] = useState('')
   const [validateError, setvalidateError] = useState([])
@@ -12,6 +13,7 @@ export default function Login({SaveUserData}) {
     "password":"",
   })
   let submitForm = async (e)=>{
+    setloading(true)
     e.preventDefault();
     let validateResponese = validateForm();
     if (validateResponese.error){
@@ -20,11 +22,13 @@ export default function Login({SaveUserData}) {
     else{
       let { data } = await axios.post(`https://route-movies-api.vercel.app/signin`,user);
     if (data.message === 'success'){
+      setloading(false)
       localStorage.setItem('token',data.token);
       SaveUserData();
       homeNavigate();
     }
     else{
+      setloading(false)
       seterror(data.message);
     }
     }
@@ -62,7 +66,7 @@ export default function Login({SaveUserData}) {
         <label htmlFor="password">Password</label>
         <input onChange={getInputValue} type="password" className='form-control my-3' name='password' />
         </div>
-        <button className='btn btn-info my-3'>Login</button>
+        <button className='btn btn-info my-3'>{loading?<i className='fas fa-spinner fa-spin'></i>:'Login'}</button>
       </form>
     </div>
     </>

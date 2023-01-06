@@ -1,15 +1,21 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import  axios  from 'axios';
-import style from './details.module.scss';
+import SliderTool from '../../ui/Slider/SliderTool';
 import { getRecommendations } from '../api/api';
+import style from './details.module.scss';
+import Loading from './../../ui/loading/Loading';
+
 export default function Details() {
+  const [loading, setloading] = useState(false)
   const [details, setdetails] = useState({});
   const [recommendationsData, setrecommendationsData] = useState([]);
   let {id,mediaType}= useParams();
   let getDetails = async()=>{
+    setloading(true);
     let {data} = await axios.get(`https://api.themoviedb.org/3/${mediaType}/${id}?api_key=3a8d4bff99757bb1b549c063f2ed3401&language=en-US`);
     setdetails(data);
+    setloading(false);
   }
 let Recommendations = async()=>{
   let data = await getRecommendations(mediaType,id);
@@ -19,10 +25,16 @@ let Recommendations = async()=>{
     getDetails()
     Recommendations()
   }, [])
-  console.log(recommendationsData);
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+  };
   return (
     <>
-    <div style={{ 
+    {loading?<Loading loading={loading}/>:<><div style={{ 
       backgroundImage: `url(https://image.tmdb.org/t/p/original${details.backdrop_path})`,
       backgroundRepeat:'no-repeat',
       backgroundSize:'cover',
@@ -56,33 +68,15 @@ let Recommendations = async()=>{
         <div className="row justify-content-center text-center">
           <p>
             <span className=' badge bg-info fs-3'>
-            Recommendations
+            Related {mediaType}
             </span>
           </p>
-          <div className="col-md-5">
-          <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-            <div className="carousel-inner">
-            <div className="carousel-item active">
-          </div>
-            {recommendationsData.map((recommend)=>
-            <div key={recommend.id} className="carousel-item">
-              <p className=' bg-danger my-0'>{recommend.title}{recommend.name}</p>
-            <img src={`https://image.tmdb.org/t/p/original${recommend.poster_path}`} className="d-block w-100" alt="" />
-          </div>
-      )}
-            </div>
-            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-              <span className="carousel-control-prev-icon" aria-hidden="true" />
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-              <span className="carousel-control-next-icon" aria-hidden="true" />
-              <span className="visually-hidden">Next</span>
-            </button>
-          </div>
+          
+          <div className="col-md-9">
+            <SliderTool recommendationsData ={recommendationsData} settings ={settings}/>
           </div>
         </div>
-      </div>
+      </div></>}
     </>
   )
 }

@@ -1,0 +1,45 @@
+@import '../../index.scss';
+.item{
+    transition: transform ease-in-out 0.5s;
+    &:hover{
+        transform: scale(1.1);
+    }
+    position: relative;
+    &:hover .item_icon{
+        opacity: 1;
+        
+    }
+    .item_icon{
+        width: 100%;
+        background-color: rgb(0, 0, 0,0.8);
+        font-size: 15px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 80%;
+        opacity: 0;
+        transition: all ease-in-out 0.5s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .ratings{
+        width: 50px;
+        height: 50px;
+        background-color: #081c22;
+        position: absolute;
+        top: 92%;
+        left: 3%;
+        padding: 10px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
+        color: $fontColor;
+        border: 1px greenyellow solid;
+        transition: transform ease-in-out 0.5s;
+    }
+    &:hover .ratings{
+        transform: translateY(-25px);
+    }
+}

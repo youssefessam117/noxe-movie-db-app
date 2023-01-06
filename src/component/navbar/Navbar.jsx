@@ -12,6 +12,9 @@ export default function Navbar({userData,logOut}) {
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+       <li className="nav-item dropdown">
+          <Link className="nav-link" to=''>Home</Link>
+        </li>
         <li className="nav-item dropdown">
           <Link className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Movies</Link>
           <ul className={`dropdown-menu bg-secondary ${styles.m_menu}`}>
@@ -39,8 +42,11 @@ export default function Navbar({userData,logOut}) {
         {userData?
         <>
         <p className="nav-link text-white" to='profile'> Hello {userData.first_name}</p>
+        <li className="nav-item dropdown">
+          <Link className="nav-link" to='favourite'>Your <span className='text-info'>Favourites</span></Link>
+        </li>
         <li className="nav-item">
-          <Link onClick={logOut} className="nav-link"><i className="fa-solid fa-right-from-bracket"></i></Link>
+        <Link onClick={logOut} className="nav-link"><i className="fa-solid fa-right-from-bracket"></i> Log Out</Link>
         </li>
         </>
         :<>

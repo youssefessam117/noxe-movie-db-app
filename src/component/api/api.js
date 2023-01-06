@@ -20,9 +20,3 @@ export let getRecommendations = async (mediaTypy, id) => {
   return data.results;
 };
 
-export let token = async () => {
-  let { data } = await axios.get(
-    `https://api.themoviedb.org/3/authentication/token/new?api_key=3a8d4bff99757bb1b549c063f2ed3401`
-  );
-  return data;
-};

@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export default function Rigester() {
+  const [loading, setloading] = useState(false)
   let navigat = useNavigate()
   const [error, seterror] = useState('')
   const [validateError, setvalidateError] = useState([])
@@ -15,6 +16,7 @@ export default function Rigester() {
     "age":"",
   })
   let submitForm = async (e)=>{
+    setloading(true)
     e.preventDefault();
     let validateResponese = validateForm();
     if (validateResponese.error){
@@ -23,9 +25,11 @@ export default function Rigester() {
     else{
       let { data } = await axios.post(`https://route-movies-api.vercel.app/signup`,user);
     if (data.message === 'success'){
+      setloading(true)
       login();
     }
     else{
+      setloading(true)
       seterror(data.message);
     }
     }
@@ -78,7 +82,7 @@ export default function Rigester() {
         <label htmlFor="password">Password</label>
         <input onChange={getInputValue} type="password" className='form-control my-3' name='password' />
         </div>
-        <button className='btn btn-info my-3'>register</button>
+        <button className='btn btn-info my-3'>{loading?<i className='fas fa-spinner fa-spin'></i>:'register'}</button>
       </form>
     </div>
     </>

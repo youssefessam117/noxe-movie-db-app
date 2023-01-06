@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import  axios  from 'axios';
-
+import Loading from './../../ui/loading/Loading';
 export default function PeopleDetails() {
 
+  const [loading, setloading] = useState(false)
     let {mediaType,id} = useParams();
     const [details, setdetails] = useState([]);
     let getDetails = async()=>{
-        let {data} = await axios.get(`https://api.themoviedb.org/3/${mediaType}/${id}?api_key=3a8d4bff99757bb1b549c063f2ed3401&language=en-US`);
-        setdetails(data);
+      setloading(true);
+      let {data} = await axios.get(`https://api.themoviedb.org/3/${mediaType}/${id}?api_key=3a8d4bff99757bb1b549c063f2ed3401&language=en-US`);
+      setdetails(data);
+      setloading(false);
       }
     useEffect(() => {
         getDetails();
@@ -16,7 +19,7 @@ export default function PeopleDetails() {
     
   return (
     <>
-    <div className="container">
+    {loading?<Loading loading={loading}/>:<><div className="container">
         <div className="row">
             <div className="col-md-3">
                 <div className="card" style={{width: '18rem'}}>
@@ -34,7 +37,7 @@ export default function PeopleDetails() {
                 <p>popularity : {details.popularity}</p>
             </div>
         </div>
-    </div>
+    </div></>}
     </>
   )
 }

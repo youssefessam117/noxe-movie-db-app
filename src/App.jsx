@@ -3,15 +3,17 @@ import { useEffect, useState } from 'react';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Details from './component/details/Details';
+import Favorites from './component/favorites/Favorites';
 import Home from './component/home/Home';
 import Login from './component/login/Login';
 import Masterlayout from './component/masterlayout/Masterlayout';
 import People from './component/people/People';
+import PeopleDetails from './component/peopleDetails/PeopleDetails';
 import Rigester from './component/register/Rigester';
 import TopRated from './component/topRated/TopRated';
 import TopRatedTv from './component/TopRatedTv/TopRatedTv';
 import Upcoming from './component/Upcoming/Upcoming';
-import PeopleDetails from './component/peopleDetails/PeopleDetails';
+
 function App() {
   const [userData, setUserData] = useState(null)
   let SaveUserData=()=>{
@@ -43,13 +45,12 @@ function App() {
       {path:'topRatedTv',element:<TopRatedTv/>},
       {path:"details/:id/:mediaType",element:<Details/>},
       {path:"peopledetails/:id/:mediaType",element:<PeopleDetails/>},
+      {path:"favourite",element:<Favorites/>},
     ]}
   ])
   return (
     <>
-    <div>
       <RouterProvider router = {routes}/>
-    </div>
     </>
   );
 }
