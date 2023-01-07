@@ -12,10 +12,10 @@ export default function Navbar({userData,logOut}) {
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-       <li className="nav-item dropdown">
+       <li className={`${styles.link_hover} nav-item dropdown`}>
           <Link className="nav-link" to=''>Home</Link>
         </li>
-        <li className="nav-item dropdown">
+        <li className={`${styles.link_hover} nav-item dropdown`}>
           <Link className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Movies</Link>
           <ul className={`dropdown-menu bg-secondary ${styles.m_menu}`}>
             <li>
@@ -26,7 +26,7 @@ export default function Navbar({userData,logOut}) {
             </li>
           </ul>
         </li>
-        <li className="nav-item dropdown">
+        <li className={`${styles.link_hover} nav-item dropdown`}>
           <Link className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tvshows</Link>
           <ul className={`dropdown-menu bg-secondary ${styles.m_menu}`}>
             <li>
@@ -34,26 +34,30 @@ export default function Navbar({userData,logOut}) {
             </li>
           </ul>
         </li>
-        <li className="nav-item dropdown">
+        <li className={`${styles.link_hover} nav-item dropdown`}>
           <Link className="nav-link" to='people'>People</Link>
         </li>
+      </ul>
+
+      <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+
       </ul>
       <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
         {userData?
         <>
-        <p className="nav-link text-white" to='profile'> Hello {userData.first_name}</p>
-        <li className="nav-item dropdown">
-          <Link className="nav-link" to='favourite'>Your <span className='text-info'>Favourites</span></Link>
+        <li className="nav-link text-white px-3" to='profile'> Hello {userData.first_name}</li>
+        <li className="nav-item px-3">
+          <Link className="nav-link" to='favourite'>Your <span className={`text-danger`}>Favourites</span> <i className="fa-regular fa-heart text-danger"></i> </Link>
         </li>
-        <li className="nav-item">
+        <li className={`${styles.auth} nav-item px-3 badge`}>
         <Link onClick={logOut} className="nav-link"><i className="fa-solid fa-right-from-bracket"></i> Log Out</Link>
         </li>
         </>
         :<>
-      <li className="nav-item">
+      <li className={`${styles.auth} nav-item px-2 bg-info badge mx-2`}>
       <Link className="nav-link" to="login">login</Link>
       </li>
-       <li className="nav-item">
+       <li className={`${styles.auth} nav-item px-2 bg-info badge mx-2`}>
           <Link className="nav-link" to="register">Register</Link>
        </li>
              </>}

@@ -24,7 +24,7 @@ let Recommendations = async()=>{
   useEffect(() => {
     getDetails()
     Recommendations()
-  }, [])
+  }, [mediaType,id])
   const settings = {
     infinite: true,
     speed: 500,
@@ -49,7 +49,7 @@ let Recommendations = async()=>{
             </div>
             </div>
           <div className="col-md-9 mt-5">
-            <span className=' fs-1 fw-bolder'>{details.original_title}{details.name}</span> <a target={`_blank`} className='fa-solid fa-link' href={details.homepage}></a>
+            <span className=' fs-1 fw-bolder'>{details.original_title}{details.name}</span> <a target={`_blank`} href={details.homepage}><i className='fa-solid fa-link'></i></a>
             <p className=' text-muted'>{details.tagline}</p>
             <p>release data : {details.release_date}{details.first_air_date}</p>
             <p>{details.genres?.map((value)=>{

@@ -13,6 +13,7 @@ import Rigester from './component/register/Rigester';
 import TopRated from './component/topRated/TopRated';
 import TopRatedTv from './component/TopRatedTv/TopRatedTv';
 import Upcoming from './component/Upcoming/Upcoming';
+import ProtectedRoute from './component/ProtectedRoute/ProtectedRoute';
 
 function App() {
   const [userData, setUserData] = useState(null)
@@ -45,7 +46,7 @@ function App() {
       {path:'topRatedTv',element:<TopRatedTv/>},
       {path:"details/:id/:mediaType",element:<Details/>},
       {path:"peopledetails/:id/:mediaType",element:<PeopleDetails/>},
-      {path:"favourite",element:<Favorites/>},
+      {path:"favourite",element:<ProtectedRoute userData={userData}><Favorites/></ProtectedRoute>},
     ]}
   ])
   return (

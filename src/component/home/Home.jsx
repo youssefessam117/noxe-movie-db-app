@@ -34,8 +34,8 @@ const settings = {
     <>
     {loading?<Loading loading ={loading}/>:<>{/* Carousel  area  */}
     <div className="container">
-    <div className="row mt-5 gx-4 gy-4 justify-content-center">
-      <div className="col-md-12 mb-0">
+    <div className="row gx-4 gy-3 justify-content-center">
+      <div className="col-md-12 my-0">
         <p className=' fs-1 fw-bolder'>Welcome.</p>
         <p className=' fs-3'>Millions of movies, TV shows and people to discover. <span className='text-secondary'>Explore now.</span></p>
       </div>
@@ -71,7 +71,7 @@ const settings = {
     </div>
 {/* movies */}
 {/* tv shows */}
-    <div className="row mt-5 gx-4 gy-4">
+    <div className="row mt-5 gx-4 gy-3">
       <div className="col-md-4">
         <div className={`w-25 mb-3 ${style.brder}`}>
         </div>

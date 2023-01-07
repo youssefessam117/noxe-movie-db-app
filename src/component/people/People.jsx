@@ -29,7 +29,7 @@ export default function People() {
       </div>
       {people.map((item,index)=>
         <div key={index} className="col-md-2">
-        <Link to={`/peopledetails/${item.id}/${item.media_type}`}>
+        <Link className='nav-link' to={`/peopledetails/${item.id}/${item.media_type}`}>
         <div className="item shadow rounded  border border-5">
           <img className='w-100' src={`https://image.tmdb.org/t/p/original${item.profile_path}`} alt={item.title} />
         </div>
